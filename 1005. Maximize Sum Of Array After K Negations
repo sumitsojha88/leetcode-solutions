@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int largestSumAfterKNegations(vector<int>& A, int K) {
+        sort(A.begin(),A.end());
+        int index=0;
+            int i=0;
+            int min=INT_MAX;
+            int sum=0;
+            
+            while(A[i]<0 && K>0)
+            {
+                   A[i]=-A[i];
+                    if(A[i]<min)
+                    {
+                            min=A[i];
+                            index=i;
+                    }
+                    K--;
+                    i++;
+            }
+            if(A[i]<min)
+            {
+                  min=A[i];
+                      index=i;
+            }
+            if(K%2==1)
+            {
+                   A[index]= -A[index];
+            }
+            for(int i=0;i<A.size();i++)
+            {    sum+=A[i];
+            }
+            
+            return sum;
+            
+            
+          }
+};
