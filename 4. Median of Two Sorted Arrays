@@ -1,0 +1,41 @@
+class Solution {
+public:
+
+  double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+	vector<int>::iterator it1 = nums1.begin(), it2 = nums2.begin();
+	int n = nums1.size() + nums2.size();
+	int m = n / 2;
+	int val1 = 0, val2 = 0;
+	for (int i = 0; i <= m; i++){
+	    val1 = val2;
+		if (it1 < nums1.end() && it2 < nums2.end())
+		{
+			if (*it1 < *it2){
+				val2 = *it1;
+				it1++;
+			}
+			else{
+				val2 = *it2;
+				it2++;
+			}
+		}
+		else if (it1 < nums1.end()){
+			val2 = *it1;
+			it1++;
+		}
+		else if (it2 < nums2.end()){
+			val2 = *it2;
+			it2++;
+		}
+	}
+
+	double r = 0;
+	if (n % 2 == 0){
+		r = (val1 + val2) / 2.0f;
+	}
+	else{
+		r = val2;
+	}
+	return r;
+}
+};
