@@ -1,0 +1,47 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+             if (!head) return NULL;
+        
+        ListNode* a = head;
+        // ListNode *temp;
+        
+        while (a) {
+            while (a->next && a->val == a->next->val) {
+                a -> next = a -> next -> next;
+            }
+            a = a->next;
+        }
+        
+        return head;
+            
+    }
+};
+
+// second code
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+  if(head == NULL)
+          return NULL; 
+		
+        ListNode * slow= head, *fast = head-> next;
+        
+        while(fast != NULL){
+            if(slow -> val == fast -> val ){
+                fast = fast -> next;
+            }
+            else{
+                slow -> next = fast;
+                fast = fast -> next;
+                slow = slow-> next;
+            }
+        }
+        if(slow-> next != NULL)
+                slow -> next = NULL;
+        return head;
+    
+            
+    }
+};
