@@ -1,0 +1,37 @@
+Algorithm:
+
+First of all calculate the length of the linked list and take the temp pointer to the end ndoe of the linked list.
+Now make a cycle in thelinked list so that rotating of nodes become easier for us.
+handle this case k%=n because there are only n unique rotations possible so there is no point of rotating k times again and again if k is greator than n;
+Now rotate k times.
+break the loop and mark it as new head
+and update the temp->next as NULL;
+return the new head;
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL || head->next==NULL || k==0) return head;
+       int n = 1;
+       ListNode* temp = head;
+       while(temp->next!=NULL){
+           n+=1;
+           temp=temp->next;
+       } 
+       temp->next = head;
+       k%=n;
+       while(--n >= k){
+           temp=temp->next;
+       }
+       ListNode* newHead = temp->next;
+        temp->next = NULL;
+        return newHead;
+    }
+};
