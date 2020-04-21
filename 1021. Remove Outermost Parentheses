@@ -1,0 +1,7 @@
+ std::string r;
+        int count = 0;
+        for(char c : S){
+            if(c == '(' && count++ > 0) r += c;
+            if(c == ')' && count-- > 1) r += c;
+        }
+        return r;
