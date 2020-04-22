@@ -1,0 +1,40 @@
+//iterative method using stack
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> v;
+        stack<TreeNode*> s;
+            while(root!=NULL || !s.empty())
+            {
+                    while(root!=NULL)
+                    {
+                           s.push(root);
+                         root=root->left;
+                    }
+                    
+                    root=s.top();
+                    s.pop();
+                    v.push_back(root->val);
+                    root=root->right;
+            }
+        return v;
+    }
+   
+};
+
+
+// recursive 
+
+  void Traverse(TreeNode* root, vector<int>& res){
+        if(root != NULL){
+            Traverse(root->left, res);
+            res.push_back(root->val);
+            Traverse(root->right, res);
+        }
+    }
+    vector<int> inorderTraversal(TreeNode* root){
+        vector<int> res;
+        Traverse(root, res);
+        return res;
+    }
