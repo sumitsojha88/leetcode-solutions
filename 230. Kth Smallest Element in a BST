@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int val;
+    int ans;
+    void fun(TreeNode *root)
+    {
+        if(root==NULL)
+            return ;
+        fun(root->left);
+        val--;
+        if(val==0)
+            ans=root->val;
+        fun(root->right);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        val=k;
+        fun(root);
+        return ans;
+    }
+};
