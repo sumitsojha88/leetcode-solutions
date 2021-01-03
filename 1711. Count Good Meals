@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int countPairs(vector<int>& d) {
+            int n=d.size();
+            
+            
+       long long  int ans=0;
+           unordered_map<int,int> mp2;
+            
+            
+            
+           
+          for(int i=0;i<n;i++)   
+            {  
+                    
+                  for(int j=1;j<=(1<<22);j=j*2)
+                  { if(mp2.find(j-d[i])!=mp2.end())
+                        ans += mp2[j-d[i]]%1000000007;
+                  }
+                    
+                            
+                             mp2[d[i]]++;
+                            
+                           
+                            
+                            
+                           
+            } 
+              
+          
+                           
+                            
+                            return ans%(int)1000000007;
+                    
+                    
+        
+    }
+};
