@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> mostCompetitive(vector<int>& nums, int k) {
+            
+            
+            stack<int> st;
+            vector<int> ans;
+            int n=nums.size();
+             for(int i=0;i<n;i++)
+            {
+               
+               // cout << st.top() << endl;
+
+
+                 while(!st.empty() && st.top()>nums[i]  && k<(n-i+st.size()))
+                 {
+                         st.pop();                 
+                 }
+
+
+
+                    if(st.size()<k)
+                     st.push(nums[i]);
+
+
+                    
+            }
+            
+            while(!st.empty())
+            {
+
+               
+                    int t=st.top();
+                     
+                    ans.push_back(t);
+                    
+                    st.pop();
+            }
+            
+            reverse(ans.begin(),ans.end());
+            
+            
+            
+            
+            return ans;
+        
+    }
+};
