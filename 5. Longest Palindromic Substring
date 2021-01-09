@@ -1,0 +1,43 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        
+        if(s.size() == 0)
+            return "";
+        
+        const int N = s.size();
+        
+        vector<vector<int>> dp(s.size(),vector<int>(s.size(),0));
+        
+        for(int i = 0;i<dp.size();i++)
+        {
+            dp[i][i] = 1;
+        }
+        int max_len = 1;
+        int start = 0;
+        
+        for(int l = 1; l <= N; l++) 
+        {
+            for(int i = 0; i < N - l; i++) 
+            {
+                int j = i + l;
+                int currentLength = l + 1;
+                
+                // when there are only 2 chars, just check the first and last chars
+                if(currentLength == 2 && s[i] == s[j])
+                    dp[i][j] = 1;
+                else {
+                    // current s[i:j] can only be palindromic iff
+                    // first and last chars are same and the substring s[i+1:j-1]
+                    // is also palindromic
+                    dp[i][j] = (s[i] == s[j] && dp[i+1][j-1]) == 1;
+                }
+                // update max length
+                if(dp[i][j] == 1 && currentLength > max_len) 
+                    max_len = currentLength, start = i;
+            }
+        }
+
+        return s.substr(start, max_len);
+    }
+};
