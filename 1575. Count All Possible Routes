@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int countRoutes(vector<int>& l, int s, int finish, int fuel) {
+        
+            int n=l.size();
+            vector<vector<int>> dp(n,vector<int> (fuel+1,0));
+            dp[s][fuel] = 1;
+            for(int k=fuel;k>=0;k--)
+            {
+                   for(int i=0;i<n;i++)
+                   {
+                           for(int j=0;j<n;j++)
+                           {
+                               if(i!=j)
+                               {
+                                       int diff = abs(l[i]-l[j]);
+                                       if(diff+k<=fuel)
+                                       {
+                                           dp[i][k] = (dp[i][k]+dp[j][k+diff])%1000000007;
+                                       }
+                               }
+                           }
+                   }
+            }
+            
+          long long int sum = 0;
+            for(int i=0;i<=fuel;i++)
+            {
+                   sum  = (sum + dp[finish][i])%1000000007;
+            }
+            
+            return sum;
+            
+    }
+};
