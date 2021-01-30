@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> sortByBits(vector<int>& arr) {
+            
+            priority_queue<pair<int,int>> pq;
+            for(int i=0;i<arr.size();i++)
+            {
+                   int c=0;
+                   int t=arr[i];
+                    while(t)
+                    {
+                          if(t&1)
+                                  c++;
+                            
+                            t = t/2;
+                    }
+                    
+                    pq.push({c,arr[i]});
+            }
+            vector<int> ans;
+            while(pq.size())
+            {
+                  ans.push_back(pq.top().second);
+                    pq.pop();
+            }
+            
+            reverse(ans.begin(),ans.end());
+            
+            return ans;
+        
+    }
+};
