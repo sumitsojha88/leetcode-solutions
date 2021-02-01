@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> restoreArray(vector<vector<int>>& a) {
+            vector<int> ans;
+            
+            unordered_map<int,vector<int>> mp;
+            unordered_map<int,int> mp2;
+            for(int i=0;i<a.size();i++)
+            {
+                   mp[a[i][1]].push_back(a[i][0]);
+                    mp[a[i][0]].push_back(a[i][1]);
+                             
+                    mp2[a[i][0]]++;
+                    mp2[a[i][1]]++;     
+            }
+            int start = 0;
+            for(int i=0;i<a.size();i++)
+            {
+                  if(mp2[a[i][0]]==1)
+                  {
+                          start = a[i][0];
+                          break;
+                  }
+                    else if(mp2[a[i][1]]==1)
+                    {
+                        start = a[i][1];   
+                            break;
+                    }
+            }
+            ans.push_back(start);
+            unordered_map<int,bool> v;
+            v[start] = true;
+            while(ans.size()!=mp2.size())
+            {
+                  for(auto i: mp[start])
+                  {
+                         if(!v[i])
+                         {
+                                 ans.push_back(i);
+                                 v[i] = true;
+                                 start = i;
+                         }
+                  }
+            }
+            
+        return ans;
+    }
+};
