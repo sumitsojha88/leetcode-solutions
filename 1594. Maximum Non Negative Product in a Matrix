@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int maxProductPath(vector<vector<int>>& a) {
+        
+            int n=a.size();
+            int m=a[0].size();
+            
+            vector<vector<long long int>> dpmax(n,vector<long long int> (m,0));
+            vector<vector<long long int>> dpmin(n,vector<long long int> (m,0));
+            
+            
+            dpmax[0][0] = a[0][0];
+            dpmin[0][0] = a[0][0];
+            
+            
+            for(int i=0;i<n;i++)
+            {
+                    for(int j=0;j<m;j++)
+                    {
+                        if(i==0 && j==0)
+                        {
+                             continue; 
+                        }
+                        else if(i==0)
+                        {
+                                dpmax[i][j] = dpmax[i][j-1]*a[i][j];
+                                dpmin[i][j] = dpmin[i][j-1]*a[i][j];
+                        }
+                          else  if(j==0)
+                          {
+                                 dpmax[i][j] = dpmax[i-1][j]*a[i][j];
+                                dpmin[i][j] = dpmin[i-1][j]*a[i][j];  
+                          }
+                            else
+                            {
+                                    if(a[i][j]<0)
+                                    {
+                          dpmax[i][j] = (min(dpmin[i][j-1],dpmin[i-1][j])*a[i][j]);
+                          dpmin[i][j] = (max(dpmax[i][j-1],dpmax[i-1][j])*a[i][j]);  
+                                    }
+                                         else
+                                         {
+                          dpmin[i][j] = (min(dpmin[i][j-1],dpmin[i-1][j])*a[i][j]);
+                          dpmax[i][j] = (max(dpmax[i][j-1],dpmax[i-1][j])*a[i][j]);       
+                                         }
+                            }
+                    }
+            }
+            
+            
+          
+            
+            if(dpmax[n-1][m-1]>=0) 
+            return dpmax[n-1][m-1]%1000000007;
+            else
+                    return -1;
+                    
+            
+    }
+};
