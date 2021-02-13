@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int maxAbsoluteSum(vector<int>& a) {
+            
+            int n=a.size();
+            
+            
+          //  int n=a.size();
+            int sum = 0;
+            
+            
+            int maxi = a[0];
+            int cmaxi = a[0];
+            for(int i=1;i<n;i++)
+            {
+                  cmaxi = max(a[i],cmaxi+a[i]);
+                    
+                  maxi = max(maxi,cmaxi);
+            }
+            
+            
+             int mini = a[0];
+            int cmini = a[0];
+            for(int i=1;i<n;i++)
+            {
+                  cmini = min(a[i],cmini+a[i]);
+                    
+                  mini = min(mini,cmini);
+            }
+            
+            
+            mini = abs(mini);
+            
+            return max(mini,maxi);
+        
+        
+    }
+};
