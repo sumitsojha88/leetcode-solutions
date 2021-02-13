@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int minimumLength(string s) {
+            
+            
+          int n=s.size();
+            
+           int i=0;
+            int j=n-1;
+            
+            while(i<j  )
+            {
+                    if(s[i]==s[j])
+                    {
+                        char temp = s[i];
+                            
+                            while(temp==s[i] && i<=j)
+                            {
+                                    i++;
+                            }
+                            
+                            
+                        
+                              while(temp==s[j] && i<=j)
+                            {
+                                    j--;
+                            }
+                    }
+                    else
+                    {
+                            break;
+                    }
+            }
+            
+            
+            return j-i+1;
+            
+            
+        
+    }
+};
