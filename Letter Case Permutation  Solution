@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<string> letterCasePermutation(string S) {
+         vector<string> ans({S});
+            for(int i=0;i<S.size();i++){
+                    if(isdigit(S[i]))
+                            continue;
+                    int len = ans.size();
+                    for(int j=0; j < len ;j++)
+                    {
+                            string temp= ans[j];
+                            temp[i] ^= 32 ;
+                            ans.push_back(temp);
+                    }
+            }
+            return ans;
+            
+    }
+};
